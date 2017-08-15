@@ -1,0 +1,56 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>森源ri记</title>
+<link rel="shortcut icon" href="img/note.ico" />
+<style>
+	#container {overflow: hidden;width: 600px; height: 50px;position: absolute;left: 400px;top: 300px;border-radius: 25px;background: #E36590;}
+	.smalldiv {width: 200px;height: 50px;background: #7E7777;padding: 0px;border: none;float: left;text-align: center;line-height: 50px;}
+	#div1 {background: #8488D4;width: 30px;}
+	#searcher {width: 530px;}
+	#div3 {width: 40px; background: #DCD354;cursor: pointer;}
+	#div5 {position: fixed;width: 200px;height: 200px;left: 0px;bottom: 0px;background: #BFB3B3;}
+</style>
+<script>
+window.onload=function ()
+{
+	var odiv3=document.getElementById("div3");
+	var odiv2=document.getElementById("searcher");
+	var odiv5=document.getElementById("div5");
+	odiv3.onclick=function ()
+	{
+		var oAjax=new XMLHttpRequest();
+		oAjax.open("post","img/echo.php?="+new Date().getTime(),true);
+		oAjax.send();
+		oAjax.onreadystatechange=function ()
+		{
+			if(oAjax.readyState==4)
+				{
+					if(oAjax.status==200)
+						{
+							//alert("成功"+oAjax.responseText);
+							//odiv5.innerHTML="<p>"+oAjax.responseText+"</p>";
+							odiv5.innerHTML="<div style='width:90px;height:80px;background:red;position: relative;left:10px;top:20px;'>"+oAjax.responseText+"</div>";
+						}
+					else
+						{
+							alert("失败");
+						}
+				}
+		}
+	}
+}
+</script>
+</head>
+
+<body>
+<div id="container">
+	<div id="div1" class="smalldiv">30</div>
+	<input id="searcher" class="smalldiv" value="22222 530"/>
+	<div id="div3" class="smalldiv">搜索</div>
+	<div id="div4" class="smalldiv">div4</div>
+	<div id="div5">div5</div>
+</div>
+</body>
+</html>
